@@ -4,10 +4,17 @@ import pandas as pd
 # load data set into pandas dataframe
 df = pd.read_csv("311_Service_Requests.csv")
 
+# remove rows that contain "Inquiry" or "Request"
+print(len(df))
+df = df[~df["service_name"].str.contains("Inquiry", na=False)]
+df = df[~df["service_name"].str.contains("Request", na=False)]
+print(len(df))
+
 # !! ALREADY EXPORTED SO NO NEEDED TO RUN
 # extract unique service names and export to a txt file
 # service_names = sorted(df["service_name"].dropna().unique())
-# with open("service_names.txt", "w") as file:
+# print(len(service_names))
+# with open("service_names (no inquiry or request).txt", "w") as file:
 #     for name in service_names:
 #         file.write(f"{name}\n")
 
@@ -16,15 +23,21 @@ df = pd.read_csv("311_Service_Requests.csv")
 # statuses = sorted(df["status_description"].dropna().unique())
 # print(statuses)
 
+# ?? all location types say community centre point so the longitude/latitudes might only be as useful as
+# community names but harder to work with
+# check location_types
+location_types = sorted(df["location_type"].dropna().unique())
+print(location_types)
+
 # remove duplicate and to be deleted items
 removable_statuses = ["Duplicate (Closed)", "Duplicate (Open)", "TO BE DELETED"]
 print(len(df))
 df = df[~df["status_description"].isin(removable_statuses)]
 print(len(df))
 
+# ?? i added a couple more columns i thought were irrelevant, remove the column names from here if you still want them
 # trim unnecessary columns
-columns_to_drop = ["service_request_id", "source", "address", "comm_code",
-                   "location_type", "point", "updated_date"]
+columns_to_drop = ["source", "address", "location_type", "point", "updated_date"]
 df.drop(columns_to_drop, axis=1, inplace=True)
 
 # convert dates to usable format and remove the time stamps
@@ -36,39 +49,29 @@ df["closed_date"] = pd.to_datetime(df["closed_date"], format="%Y/%m/%d %I:%M:%S 
 # print(df["longitude"].apply(type).value_counts())
 # print(df["latitude"].apply(type).value_counts())
 
-# I manually went through the list of service names to combine useful ones under relevant headings
-# import the csv of service names into a pandas data frame
-useful_service_names_df = pd.read_csv("useful_service_names.csv")
-
-# trim unnecessary rows
-print(len(df))
-useful_service_names_list = useful_service_names_df.stack().tolist()
-df = df[df["service_name"].isin(useful_service_names_list)]
-print(len(df))
+# !! not necessary until step 7 maybe
+# # I manually went through the list of service names to combine useful ones under relevant headings
+# # import the csv of service names into a pandas data frame
+# useful_service_names_df = pd.read_csv("useful_service_names.csv")
+# # trim unnecessary rows
+# print(len(df))
+# useful_service_names_list = useful_service_names_df.stack().tolist()
+# df = df[df["service_name"].isin(useful_service_names_list)]
+# print(len(df))
 
 # check each column for blanks
 for column in df.columns:
     blanks = (df[column].isna()).sum()
     print(f"{column}: {blanks}")
-# requested_date: 0
-# closed_date: 13992
 
-# ?? WHAT VALUES TO PUT IN CLOSED DATE? THESE ARE STILL VALID DATA POINTS THEY JUST AREN'T CLOSED YET
-# ?? JUST IN MY SELECTION SO FAR OF 1734023 SERVICE REQUESTS 13992 ARE STILL OPEN, THAT'S .8% -- SMALL ENOUGH TO IGNORE?
-
-# status_description: 0
-# service_name: 0
-# agency_responsible: 0
 # comm_name: 2038
 # longitude: 2078
 # latitude: 2078
 
 # trim rows with blank community names
 df = df[df["comm_name"].notna()]
+
 # checking if blank long/lat have community names
-# for column in df.columns:
-#     blanks = (df[column].isna()).sum()
-#     print(f"{column}: {blanks}")
 # blank_lat_long = (df["longitude"].isna())
 # df[blank_lat_long].to_csv("blank_lat_long.csv")
 
@@ -83,12 +86,13 @@ df = df[df["comm_name"].notna()]
 # ?? THERE ARE ~3-7 UNIQUE COORDINATES PER COMMUNITY
 # ?? MAYBE RANDOMLY CHOOSE ONE OF THE COORDINATES TO ADD TO BLANK LONG/LAT?
 
+# !! not necessary until step 7 maybe
 # make a category column in the data frame based on the columns in the useful names df
-category = {}
-for column in useful_service_names_df.columns:
-    for value in useful_service_names_df[column].dropna():
-        category[value] = column
-df["category"] = df["service_name"].map(category)
+# category = {}
+# for column in useful_service_names_df.columns:
+#     for value in useful_service_names_df[column].dropna():
+#         category[value] = column
+# df["category"] = df["service_name"].map(category)
 
 # export csv from cleaned dataframe
-# df.to_csv("311_clean_service_requests.csv")
+df.to_csv("311_clean_service_requests.csv")
