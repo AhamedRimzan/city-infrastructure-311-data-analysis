@@ -35,7 +35,7 @@ print(len(df))
 df = df[~df["status_description"].isin(removable_statuses)]
 print(len(df))
 
-# ?? i added a couple more columns i thought were irrelevant, remove the column names from here if you still want them
+# ?? I added a couple more columns I thought were irrelevant, remove the column names from here if you still want them
 # trim unnecessary columns
 columns_to_drop = ["source", "address", "location_type", "point", "updated_date"]
 df.drop(columns_to_drop, axis=1, inplace=True)
@@ -64,12 +64,26 @@ for column in df.columns:
     blanks = (df[column].isna()).sum()
     print(f"{column}: {blanks}")
 
-# comm_name: 2038
-# longitude: 2078
-# latitude: 2078
-
-# trim rows with blank community names
+# trim rows with blank community names, service name
 df = df[df["comm_name"].notna()]
+df = df[df["service_name"].notna()]
+
+for column in df.columns:
+    blanks = (df[column].isna()).sum()
+    print(f"{column}: {blanks}")
+
+# ?? these are the left over blanks -
+# service_request_id: 0
+# requested_date: 0
+# closed_date: 54395 - closed dates are ok
+# status_description: 0
+# service_name: 0
+# agency_responsible: 248 - still have service names so does it matter? is this column actually useful?
+# comm_code: 22 - still have community names so we can add the comm code easily, is this column actually useful?
+# comm_name: 0
+# longitude: 78 - still have community names, is this column actually useful?
+# latitude: 78 - still have community names, is this column actually useful?
+
 
 # checking if blank long/lat have community names
 # blank_lat_long = (df["longitude"].isna())
@@ -95,4 +109,4 @@ df = df[df["comm_name"].notna()]
 # df["category"] = df["service_name"].map(category)
 
 # export csv from cleaned dataframe
-df.to_csv("311_clean_service_requests.csv")
+# df.to_csv("311_clean_service_requests.csv")
