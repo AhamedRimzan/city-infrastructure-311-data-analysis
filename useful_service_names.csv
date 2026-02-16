@@ -1,27 +1,27 @@
-Water and Sewage,Roads,Animals,Community Concerns,Social Disturbances,Electrical,Gas
-WATS - Water Outage,Roads - Traffic or Pedestrian Light Repair,ACPL - Lost and Found Animal,Bylaw - Long Grass - Weeds Infraction,Bylaw - Cannabis Concerns,CBS - Emergency Electrical Reconnection,CBS Concern - Heating & Ventilation
-WATS - Water Pressure Issues,Roads - Traffic Operational Improvement Suggestions,AS - Animal Bite,Bylaw - Material on Public Property,Bylaw - Disturbance and Behavioural Concerns,CBS Concern - Electrical,CBS Concern - Plumbing and Gas
-WATS - Water Quality,Roads - Traffic Operational Improvement Inquiry,AS - Animal Chase - Threat,Bylaw - Material on Public Property - CAD,Bylaw - Noise Concerns,,
-WATS - Water Main Break or Leak,Roads - Traffic Calming Construction Inquiries,AS - Animal Damaging Pet or Property,Bylaw - Other Concerns,Bylaw - Vandalism and Property Damage Concerns,,
-WATS - Urgent Water Reconnect,Roads - Streetlight Maintenance,AS - Animal Injured,Bylaw - Prohibited Business,,,
-WATS - Temporary Water Line Issues,Roads - Streetlight Damage,AS - Animal Interference,Bylaw - Property Maintenance Concerns,,,
-WATS - Service and Main Valve Issues,Roads - Streetlight - Specialty and Bridge Light Maintenance,AS - Animal Noise,Bylaw - Snow and Ice on Sidewalk,,,
-WATS - Sewage Back-up,Roads - Stairs - Damage,AS - Animal Park - Pathway Concerns,Bylaw - Spills Concerns,,,
-WATS - Sewage Backup  OLD - DO NOT USE,Roads - Speeding Concerns,AS - Animal Tethered -Tied,Bylaw - Temporary Signs Infraction on City Property,,,
-WATS - Sewer Maintenance,Roads - Snow and Ice Control,AS - Animal Vehicle Offences,Bylaw - Tree - Shrub Infraction,,,
-WATS - Manhole Concerns,Roads - Sidewalk Installation and Accessibility,AS - Animal at Large,Bylaw - Vehicle Concerns,,,
-WATS - Drainage Concerns,Roads - Sidewalk - Curb and Gutter Repair,AS - Animal in Off Leash Area,Bylaw - Waste and Recycling Infractions,,,
-WATS - Emergency Water Temporary Off,Roads - Roadway Maintenance,AS - Bee Concern or Inquiry,Bylaw - Waste and Recycling Infractions - CAD,,,
-WATS - Erosion and Sediment Control,Roads - Repaving Candidate Street and Inquiries,AS - Coyote Sightings,Bylaw - Wastewater - Sanitary Concern,,,
-WATS - Root Control Program,Roads - Pothole Maintenance,AS - Dog Defecation,Bylaw - Water Misuse / Wasting Concern,,,
-WATS - Root Control Program - OLD - Do not use,Roads - Pavement Markings - Missing or Faded,AS - Excess Pet Concern,CBS - 2013 Flood Damaged Property - Assistance,,,
-Bylaw - Water Services Request,Roads - Ongoing Paving Concerns,AS - Human Injury,CBS - Building Construction Concerns and Inquiries,,,
-Bylaw - Water Services Request - CAD,Roads - Local Improvement Inquiry,AS - Livestock - Bird(s) in the City,CBS - DCI - Illegal Suite,,,
-Bylaw - Water and Drainage Concerns,Roads - Fence - Noise Barrier - Retaining Wall Repair,AS - Livestock and Bird(s) in the City,CBS - DCI - Vehicle Infractions,,,
-CBS Concern - Plumbing and Gas,Roads - Existing Speed Limit Sign Concern,AS - Lost and Found Animal,CBS - Infill Construction Concerns,,,
-,Roads - Detour Urgent (Safety) Concerns,AS - No Control Dog in Off Leash Area,CBS Concern - Building Without a Permit,,,
-,Roads - Detour Inquiry,AS - Pick Up Stray,,,,
-,Roads - Debris on Street/Sidewalk/Boulevard,AS - Rat Sighting,,,,
-,Roads - Bridge - Tunnel - Underpass Concern,AS - Unlicensed Animal,,,,
-,Roads - Boulevard Maintenance,AS - Wildlife Sightings,,,,
-,Roads - Backlane Maintenance,,,,,
+Sewage,Roads
+WATS - Sewage Back-up,Roads - Traffic or Pedestrian Light Repair
+WATS - Sewage Backup  OLD - DO NOT USE,Roads - Traffic Operational Improvement Suggestions
+WATS - Sewer Maintenance,Roads - Traffic Operational Improvement Inquiry
+WATS - Manhole Concerns,Roads - Traffic Calming Construction Inquiries
+WATS - Drainage Concerns,Roads - Streetlight Maintenance
+Bylaw - Water and Drainage Concerns,Roads - Streetlight Damage
+,Roads - Streetlight - Specialty and Bridge Light Maintenance
+,Roads - Stairs - Damage
+,Roads - Speeding Concerns
+,Roads - Snow and Ice Control
+,Roads - Sidewalk Installation and Accessibility
+,Roads - Sidewalk - Curb and Gutter Repair
+,Roads - Roadway Maintenance
+,Roads - Repaving Candidate Street and Inquiries
+,Roads - Pothole Maintenance
+,Roads - Pavement Markings - Missing or Faded
+,Roads - Ongoing Paving Concerns
+,Roads - Local Improvement Inquiry
+,Roads - Fence - Noise Barrier - Retaining Wall Repair
+,Roads - Existing Speed Limit Sign Concern
+,Roads - Detour Urgent (Safety) Concerns
+,Roads - Detour Inquiry
+,Roads - Debris on Street/Sidewalk/Boulevard
+,Roads - Bridge - Tunnel - Underpass Concern
+,Roads - Boulevard Maintenance
+,Roads - Backlane Maintenance
