@@ -1,10 +1,28 @@
 # imports
 import pandas as pd
 import os
+import glob
 
 # load data set into pandas dataframe
 download_folder = os.path.join(os.path.expanduser("~"), "Downloads")
-df = pd.read_csv(os.path.join(download_folder, "311_Service_Requests.csv"))
+file_string = os.path.join(download_folder, "*311_Service_Requests*")
+possible_files = glob.glob(file_string)
+if len(possible_files) == 1: df = pd.read_csv(possible_files[0])
+elif len(possible_files) > 1:
+    for _, file in enumerate(possible_files, start=1):
+        print(f"{_}. {file}")
+    while True:
+        try:
+            choice = int(input("Select a file by entering a number: "))
+            if 1 <= choice <= len(possible_files):
+                print(f"You selected: {possible_files[choice - 1]}")
+                df = pd.read_csv(possible_files[choice - 1])
+                break
+            else:
+                print("Please enter a valid number")
+        except ValueError:
+            print("Please enter a valid number")
+else: print("No valid file found")
 
 # remove rows that contain "Inquiry" or "Request"
 df = df[~df["service_name"].str.contains("Inquiry", na=False)]
