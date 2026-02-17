@@ -38,7 +38,7 @@ print("Removing duplicates...")
 removable_statuses = ["Duplicate (Closed)", "Duplicate (Open)", "TO BE DELETED"]
 df = df[~df["status_description"].isin(removable_statuses)]
 
-# trim unnecessary columns
+# remove unnecessary columns
 print("Removing address, location_type, point and updated_date columns...")
 columns_to_drop = ["address", "location_type", "point", "updated_date"]
 df.drop(columns_to_drop, axis=1, inplace=True)
@@ -48,10 +48,30 @@ print("Removing timestamps...")
 df["requested_date"] = pd.to_datetime(df["requested_date"], format="%Y/%m/%d %I:%M:%S %p").dt.date
 df["closed_date"] = pd.to_datetime(df["closed_date"], format="%Y/%m/%d %I:%M:%S %p").dt.date
 
-# trim rows with blank community names, service name
-print("Removing blank data...")
+# remove rows with blank community names, service name
+print("Removing some blank data...")
 df = df[df["comm_name"].notna()]
 df = df[df["service_name"].notna()]
+
+# fill in blanks in comm_code and long/lat using values from other rows with the same comm_name
+# fill in blanks in agency_responsible using values from other rows with the same service_name
+print("Filling other blank data...")
+df["comm_code"] = df["comm_code"].fillna(df.groupby("comm_name")["comm_code"].transform("first"))
+df["longitude"] = df["longitude"].fillna(df.groupby("comm_name")["longitude"].transform("first"))
+df["latitude"] = df["latitude"].fillna(df.groupby("comm_name")["latitude"].transform("first"))
+df["agency_responsible"] = (df["agency_responsible"]
+                            .fillna(df.groupby("service_name")["agency_responsible"].transform("first")))
+agency_free_to_keep = ["CPI - Water and Sewer Main Condition Inquiries", "CPI - Bridge - Tunnel - Underpass Concern"]
+mask = df["service_name"].isin(agency_free_to_keep) & df["agency_responsible"].isna()
+df.loc[mask, "agency_responsible"] = "Unknown"
+
+# remove all remaining blanks except closed_dates that are still open
+print("Removing more blank data...")
+df = df[(df["status_description"] == "Open") | ~df.isna().any(axis=1)]
+print("Remaining blanks in each column: ")
+for column in df.columns:
+    blanks = (df[column].isna()).sum()
+    print(f"{column}: {blanks}")
 
 # export csv from cleaned dataframe
 print("Exporting cleansed CSV...")
