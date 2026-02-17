@@ -1,8 +1,10 @@
 # imports
 import pandas as pd
+import os
 
 # load data set into pandas dataframe
-df = pd.read_csv("311_Service_Requests.csv")
+download_folder = os.path.join(os.path.expanduser("~"), "Downloads")
+df = pd.read_csv(os.path.join(download_folder, "311_Service_Requests.csv"))
 
 # remove rows that contain "Inquiry" or "Request"
 df = df[~df["service_name"].str.contains("Inquiry", na=False)]
@@ -25,4 +27,4 @@ df = df[df["comm_name"].notna()]
 df = df[df["service_name"].notna()]
 
 # export csv from cleaned dataframe
-df.to_csv("311_clean_service_requests.csv", index=False)
+df.to_csv(os.path.join(download_folder, "311_clean_service_requests.csv"), index=False)
