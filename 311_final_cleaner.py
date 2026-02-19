@@ -27,6 +27,11 @@ elif len(possible_files) > 1:
             print("Please enter a valid number")
 else: print("No valid file found")
 
+# print info on dataset
+print("This dataset contains: ")
+print(f"{len(df.columns)} columns")
+print(f"{len(df)} rows")
+
 # remove rows that contain "Inquiry" or "Request"
 print("Removing inquiries...")
 df = df[~df["service_name"].str.contains("Inquiry", na=False)]
@@ -68,7 +73,12 @@ df.loc[mask, "agency_responsible"] = "Unknown"
 # remove all remaining blanks except closed_dates that are still open
 print("Removing more blank data...")
 df = df[(df["status_description"] == "Open") | ~df.isna().any(axis=1)]
-print("Remaining blanks in each column: ")
+
+# print info for exported file
+print("This exported dataset contains: ")
+print(f"{len(df.columns)} columns")
+print(f"{len(df)} rows")
+print("Blanks remaining in each column: ")
 for column in df.columns:
     blanks = (df[column].isna()).sum()
     print(f"{column}: {blanks}")
